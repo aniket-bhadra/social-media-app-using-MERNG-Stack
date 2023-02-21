@@ -4,6 +4,10 @@ const { ApolloServer } = require("apollo-server");
 //importing one of the dependencies of apollo server
 const gql = require("graphql-tag");
 
+const mongoose = require("mongoose");
+
+const { MONGODB } = require("./config.js");
+
 //step2
 //here write your grpahql types
 //
@@ -13,7 +17,7 @@ const typeDefs = gql`
   }
 `;
 
-
+//resolvers
 const resolvers = {
   Query: {
     sayHi: () => "Hello World!!!!!!",
@@ -26,9 +30,19 @@ const server = new ApolloServer({
   resolvers,
 });
 
+//server instance is created, now start the server, when DB is connected
 
-//server instance is created, now start the server
-
-server.listen({ port: 5000 }).then((res) => {
-  console.log(`Server is listening at ${res.url}`);
-});
+mongoose
+  .connect(MONGODB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("MongoDB Connected");
+    return server.listen({ port: 5000 });
+  })
+  .then((res) => {
+    console.log(`Server is listening at ${res.url}`);
+  });
