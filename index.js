@@ -32,7 +32,8 @@ const resolvers = {
       //it better to wrap in try catch, coz- if your query fails, it might stops your actual server, so that's why handle the catch separtly
 
 
-     
+      //so we fetch everything from DB, & filter accoding to client request in here & then send to client.
+      //and the range of client request is also defined by us in graphQL
 
       try {
         const posts = await Post.find();
