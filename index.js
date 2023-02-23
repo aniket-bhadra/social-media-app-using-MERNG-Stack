@@ -6,21 +6,41 @@ const gql = require("graphql-tag");
 
 const mongoose = require("mongoose");
 
+
+const Post = require("./models/Post");
 const { MONGODB } = require("./config.js");
 
 //step2
 //here write your grpahql types
-//
 const typeDefs = gql`
+  type Post {
+    id: ID!
+    body: String!
+    createdAt: String!
+    username: String!
+  }
   type Query {
-    sayHi: String!
+    getPosts: [Post]
   }
 `;
+//so we've query-- getPosts. now create a resolver for this
 
-//resolvers
+//resolvers--
 const resolvers = {
   Query: {
-    sayHi: () => "Hello World!!!!!!",
+    async getPosts() {
+      //it better to wrap in try catch, coz- if your query fails, it might stops your actual server, so that's why handle the catch separtly
+
+
+     
+
+      try {
+        const posts = await Post.find();
+        return posts;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
   },
 };
 
