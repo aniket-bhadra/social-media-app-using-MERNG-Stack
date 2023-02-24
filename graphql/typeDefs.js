@@ -7,7 +7,38 @@ module.exports = gql`
     createdAt: String!
     username: String!
   }
+
+  type User {
+    id: ID!
+    email: String!
+    token: String!
+    username: String!
+    createdAt: String!
+  }
+
+  input RegisterInput {
+    username: String!
+    password: String!
+    confirmPassword: String!
+    email: String!
+  }
+
   type Query {
     getPosts: [Post]
   }
+
+  type Mutation {
+    register(registerInput: RegisterInput): User!
+  }
 `;
+
+//input ---this not the type. this is an input which is diff type of type which is given as input to resolver for it to return something for us
+//register(registerInput: RegisterInput)--this needs to return something
+
+// type User{
+//   id: ID!
+//   email: String!
+// }
+//even if we specify required it doesn't mean that the user has to get these. actually that means we have to return them from our Resolver but the user can still opt out from not getting these
+
+
