@@ -41,4 +41,4 @@ module.exports = gql`
 // }
 //even if we specify required it doesn't mean that the user has to get these. actually that means we have to return them from our Resolver but the user can still opt out from not getting these
 
-
+//so whatever we r setting here weather it is input type or returrn type------it is for our resolver.
