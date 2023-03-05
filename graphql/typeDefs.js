@@ -52,6 +52,11 @@ module.exports = gql`
     likePost(postId: ID!): Post!
 
   }
+
+
+  type Subscription{
+    newPost: Post!
+  }
 `;
 
 //input ---this not the type. this is an input which is diff type of type which is given as input to resolver for it to return something for us

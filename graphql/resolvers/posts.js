@@ -42,6 +42,13 @@ module.exports = {
       });
 
       const post = await newPost.save();
+
+      context.pubsub.publish('NEW_POST', {
+        //publicatiion
+         newPost: post
+      })
+
+      //trigger name-has to be same name eariler, then the payload, where the value is the post thats been created
       return post;
     },
 
@@ -84,4 +91,14 @@ module.exports = {
       } else throw new UserInputError("Post not found");
     },
   },
+
+  Subscription: {
+    newPost: {
+      //subscription
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("NEW_POST"),
+    },
+  },
 };
+
+
+//its an event type, convention
