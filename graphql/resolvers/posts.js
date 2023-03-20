@@ -32,7 +32,11 @@ module.exports = {
   Mutation: {
     async createPost(_, { body }, context) {
       const user = checkAuth(context);
-      console.log(user);
+      // console.log(user);
+
+      if (body.trim() === "") {
+        throw new Error("Post body must not be empty");
+      }
 
       const newPost = new Post({
         body,
@@ -43,10 +47,10 @@ module.exports = {
 
       const post = await newPost.save();
 
-      context.pubsub.publish('NEW_POST', {
+      context.pubsub.publish("NEW_POST", {
         //publicatiion
-         newPost: post
-      })
+        newPost: post,
+      });
 
       //trigger name-has to be same name eariler, then the payload, where the value is the post thats been created
       return post;
@@ -99,6 +103,5 @@ module.exports = {
     },
   },
 };
-
 
 //its an event type, convention
