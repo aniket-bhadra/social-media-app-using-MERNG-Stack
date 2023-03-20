@@ -5,10 +5,7 @@ const commentsResolvers = require("./comments");
 //now combine both of these
 module.exports = {
   Post: {
-    likeCount(parent) {
-      console.log("not modified value of parent: ", parent);
-      return parent.likes.length;
-    },
+    likeCount: (parent) => parent.likes.length,
     commentCount: (parent) => parent.comments.length,
   },
 
