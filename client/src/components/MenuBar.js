@@ -14,11 +14,6 @@ function MenuBar() {
         onClick={handleItemClick}
       />
 
-      <Menu.Item
-        name="friends"
-        active={activeItem === "friends"}
-        onClick={handleItemClick}
-      />
       <Menu.Menu position="right">
         <Menu.Item
           name="login"
