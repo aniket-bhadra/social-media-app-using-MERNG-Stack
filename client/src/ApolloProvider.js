@@ -8,7 +8,7 @@ import { ApolloProvider } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:3000/",
+  uri: "http://localhost:5000/",
 });
 
 //there pass some opitions, where uri is pointing to our GraphQL server (endpoint for our server, in production it will be different)
