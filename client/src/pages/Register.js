@@ -18,10 +18,26 @@ const Register = () => {
     });
   };
 
+  //after passing REGISTER_USER, then the pass the option object where update() will be triggered if the mutation is succefully executed. proxy- hold meta deta, result-hold the result of the mutation
+  //then also we need to give varibles coz--this is mutation
+  //need to send like this--
+  // varibles: {
+  //   username: values.username//just like this add rest of theree varibles value
+  // }
+  //but since values contain also the same like structure so simply put it values
+
+  //then after all of that trigger the addUser() function when you want to submit the form.
+
+  const [addUser, { loading }] = useMutation(REGISTER_USER, {
+    update(proxy, result) {
+      console.log(result);
+    },
+    variables: values,
+  });
 
   const onSubmit = (event) => {
     event.preventDefault();
-  
+    addUser();
   };
 
   return (
@@ -68,6 +84,28 @@ const Register = () => {
   );
 };
 
-
+const REGISTER_USER = gql`
+  mutation register(
+    $username: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+  ) {
+    register(
+      registerInput: {
+        username: $username
+        email: $email
+        password: $password
+        confirmPassword: $confirmPassword
+      }
+    ) {
+      id
+      email
+      username
+      createdAt
+      token
+    }
+  }
+`;
 
 export default Register;
