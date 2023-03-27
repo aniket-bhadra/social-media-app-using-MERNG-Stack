@@ -6,7 +6,7 @@ const PostCard = ({
   post: { body, createdAt, id, username, likeCount, commentCount, likes },
 }) => {
   return (
-    <Card>
+    <Card fluid>
       <Card.Content>
         <Image
           floated="right"
@@ -14,7 +14,7 @@ const PostCard = ({
           src="https://react.semantic-ui.com/images/avatar/large/jenny.jpg"
         />
         <Card.Header>{username}</Card.Header>
-        <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
+        <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
         <Card.Description>{body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
