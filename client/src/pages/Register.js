@@ -36,12 +36,13 @@ const Register = () => {
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
       console.log(result);
-
+      console.log("inside update");
       navigate("/", {
         replace: true,
       });
     },
     onError(err) {
+      console.log("inside onError");
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -50,6 +51,7 @@ const Register = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     addUser();
+    console.log("inside onSubmit");
   };
 
   return (
