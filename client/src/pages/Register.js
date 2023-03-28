@@ -33,16 +33,16 @@ const Register = () => {
 
   //if we get errors onError() triggered
 
+  //untill the mutation is executing the loading varible is--true. after the execution of mutation then the lodaing varible become false regardless whether it is succeed or failed. then if succeed--> update gets called, if failed then OnError gets called.
+
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
       console.log(result);
-      console.log("inside update");
       navigate("/", {
         replace: true,
       });
     },
     onError(err) {
-      console.log("inside onError");
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -51,7 +51,6 @@ const Register = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     addUser();
-    console.log("inside onSubmit");
   };
 
   return (
