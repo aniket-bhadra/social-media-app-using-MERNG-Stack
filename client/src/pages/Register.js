@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({
     username: "",
@@ -34,6 +36,10 @@ const Register = () => {
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
       console.log(result);
+
+      navigate("/", {
+        replace: true,
+      });
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
