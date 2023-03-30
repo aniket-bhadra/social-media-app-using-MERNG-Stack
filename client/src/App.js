@@ -5,6 +5,7 @@ import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
 import { AuthProvider } from "./context/auth";
+import AuthRoute from "./util/AuthRoute";
 
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -18,8 +19,22 @@ function App() {
         <MenuBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={
+              <AuthRoute>
+                <Login />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <AuthRoute>
+                <Register />
+              </AuthRoute>
+            }
+          />
         </Routes>
       </Container>
     </AuthProvider>
