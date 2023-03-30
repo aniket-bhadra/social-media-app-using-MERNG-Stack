@@ -8,7 +8,7 @@ module.exports = {
     async getPosts() {
       //it better to wrap in try catch, coz- if your query fails, it might stops your actual server, so that's why handle the catch separtly
       try {
-        const posts = await Post.find().sort("createdAt");
+        const posts = await Post.find().sort("-createdAt");
         return posts;
       } catch (error) {
         throw new Error(error);
