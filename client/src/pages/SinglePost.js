@@ -21,7 +21,9 @@ const SinglePost = () => {
   });
 
   const deletePostCallback = () => {
-    navigate("/");
+    navigate("/", {
+      replace: true,
+    });
   };
 
   let postMarkup;
