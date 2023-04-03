@@ -4,13 +4,16 @@ import { useMutation } from "@apollo/client";
 
 import { Button, Confirm, Icon } from "semantic-ui-react";
 
-const DeleteButton = ({ postId }) => {
+const DeleteButton = ({ postId, callback }) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     update(_, result) {
       setConfirmOpen(false);
       // * remove the post from cache, else it will not shown to front end
+      if (callback) {
+        callback();
+      }
     },
     variables: {
       postId,

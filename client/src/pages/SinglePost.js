@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import { Button, Card, Grid, Icon, Image, Label } from "semantic-ui-react";
 import moment from "moment";
 
@@ -11,13 +12,17 @@ import DeleteButton from "../components/DeleteButton";
 
 const SinglePost = () => {
   const { postId } = useParams();
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  console.log(postId);
   const { data } = useQuery(FETCH_POST_QUERY, {
     variables: {
       postId,
     },
   });
+
+  const deletePostCallback = () => {
+    navigate("/");
+  };
 
   let postMarkup;
   if (!data) {
@@ -69,7 +74,7 @@ const SinglePost = () => {
                 </Button>
 
                 {user && user.username === username && (
-                  <DeleteButton postId={id} />
+                  <DeleteButton postId={id} callback={deletePostCallback} />
                 )}
               </Card.Content>
             </Card>
