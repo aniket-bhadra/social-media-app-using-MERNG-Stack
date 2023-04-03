@@ -42,6 +42,8 @@ const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
     </Button>
   );
 
+  // * onClick={likePost} in this below button should be revisited coz it can cause minor bug
+
   return (
     <Button as="div" labelPosition="right" onClick={likePost}>
       {likeButton}
