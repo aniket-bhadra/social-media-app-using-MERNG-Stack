@@ -17,7 +17,7 @@ const PostForm = () => {
       const data = proxy.readQuery({
         query: FETCH_POSTS_QUERY,
       });
-      //now all that data that's in our cache is siting inside of this data varible
+      //now in our cache all the data related to that query is  siting inside of this data varible
 
       proxy.writeQuery({
         query: FETCH_POSTS_QUERY,
