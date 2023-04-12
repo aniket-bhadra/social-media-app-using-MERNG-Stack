@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/client";
@@ -22,6 +22,8 @@ const SinglePost = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const commentInputRef = useRef(null);
+
   const [comment, setComment] = useState("");
 
   const { data } = useQuery(FETCH_POST_QUERY, {
@@ -33,6 +35,7 @@ const SinglePost = () => {
   const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
     update() {
       setComment("");
+      commentInputRef.current.blur();
     },
     variables: {
       postId,
@@ -113,6 +116,7 @@ const SinglePost = () => {
                         name="comment"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
+                        ref={commentInputRef}
                       />
                       <button
                         type="submit"
