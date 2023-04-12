@@ -17,6 +17,7 @@ import moment from "moment";
 import { AuthContext } from "../context/auth";
 import LikeButton from "../components/LikeButton";
 import DeleteButton from "../components/DeleteButton";
+import MyPopup from "../util/MyPopup";
 
 const SinglePost = () => {
   const { postId } = useParams();
@@ -85,18 +86,20 @@ const SinglePost = () => {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                  as="div"
-                  labelPosition="right"
-                  onClick={() => console.log("Commented on post")}
-                >
-                  <Button basic color="purple">
-                    <Icon name="comments" />
+                <MyPopup content="Comment on post">
+                  <Button
+                    as="div"
+                    labelPosition="right"
+                    onClick={() => commentInputRef.current.focus()}
+                  >
+                    <Button basic color="purple">
+                      <Icon name="comments" />
+                    </Button>
+                    <Label basic color="purple" pointing="left">
+                      {commentCount}
+                    </Label>
                   </Button>
-                  <Label basic color="purple" pointing="left">
-                    {commentCount}
-                  </Label>
-                </Button>
+                </MyPopup>
 
                 {user && user.username === username && (
                   <DeleteButton postId={id} callback={deletePostCallback} />
