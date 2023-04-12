@@ -84,6 +84,9 @@ const SinglePost = () => {
             {comments.map((comment) => (
               <Card fluid key={comment.id}>
                 <Card.Content>
+                  {user && user.username === comment.username && (
+                    <DeleteButton postId={id} commentId={comment.id} />
+                  )}
                   <Card.Header>{comment.username}</Card.Header>
                   <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
                   <Card.Description>{comment.body}</Card.Description>
