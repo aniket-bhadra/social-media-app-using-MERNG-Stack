@@ -9,20 +9,13 @@ import MyPopup from "../util/MyPopup";
 const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
   const [liked, setLiked] = useState(false);
 
-  //1st determine whether we've liked it or not
-  //so, with this check,liked only happend if in DB also we succefully liked,here we don't update UI only, Like UI only updates if in DB we successfully updated
   useEffect(() => {
     if (user && likes.find((like) => like.username === user.username)) {
-      //means we've liked the post
-
       setLiked(true);
     } else {
-      //means we've not liked the post
       setLiked(false);
     }
   }, [user, likes]);
-
-  //liked or unliked a post, trigger home component to re render due to auto update in Apollo's cache, so along with home compononent all of its child means all the post will re render. but the useEffect callback fun only runs for that post. not all post. because after liked or unliked only that specific post's like array is changed, not all post like array is changed so their dependency array remain same for useEffect()
 
   const [likePost] = useMutation(LIKE_POST_MUTATION, {
     variables: { postId: id },
@@ -30,27 +23,99 @@ const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
 
   const likeButton = user ? (
     liked ? (
-      <Button color="blue">
-        <Icon name="heart" />
+      <Button 
+        color="red" 
+        className="like-button-inner"
+        style={{ 
+          borderRadius: "50px",
+          backgroundColor: "#FF3B30",
+          color: "white",
+          boxShadow: "0 2px 4px rgba(255,59,48,0.3)",
+          border: "none",
+          padding: "0.6em 0.8em",
+          minWidth: "unset",
+          margin: 0,
+          transition: "all 0.2s ease"
+        }}
+      >
+        <Icon name="heart" style={{ margin: 0 }} />
       </Button>
     ) : (
-      <Button color="blue" basic>
-        <Icon name="heart" />
+      <Button 
+        color="red" 
+        basic 
+        className="like-button-inner"
+        style={{ 
+          borderRadius: "50px",
+          borderColor: "#FF3B30",
+          color: "#FF3B30 !important",
+          boxShadow: "none",
+          padding: "0.6em 0.8em",
+          minWidth: "unset",
+          margin: 0,
+          transition: "all 0.2s ease"
+        }}
+      >
+        <Icon name="heart" style={{ margin: 0 }} />
       </Button>
     )
   ) : (
-    <Button as={Link} to="/login" color="blue" basic>
-      <Icon name="heart" />
+    <Button 
+      as={Link} 
+      to="/login" 
+      color="red" 
+      basic
+      className="like-button-inner"
+      style={{ 
+        borderRadius: "50px",
+        borderColor: "#FF3B30",
+        color: "#FF3B30 !important",
+        boxShadow: "none",
+        padding: "0.6em 0.8em",
+        minWidth: "unset",
+        margin: 0,
+        transition: "all 0.2s ease"
+      }}
+    >
+      <Icon name="heart" style={{ margin: 0 }} />
     </Button>
   );
 
-  // * onClick={likePost} in this below button should be revisited coz it can cause minor bug
-
   return (
-    <Button as="div" labelPosition="right" onClick={likePost}>
-      <MyPopup content={liked ? "Unlike" : "Like"}>{likeButton}</MyPopup>
+    <Button 
+      as="div" 
+      labelPosition="right" 
+      onClick={likePost}
+      className="like-button"
+      style={{ 
+        background: "transparent", 
+        margin: 0,
+        padding: 0,
+        border: "none",
+        boxShadow: "none",
+        display: "flex",
+        alignItems: "center"
+      }}
+    >
+      <MyPopup content={liked ? "Unlike" : "Like"}>
+        {likeButton}
+      </MyPopup>
 
-      <Label basic color="blue" pointing="left">
+      <Label 
+        basic 
+        style={{ 
+          borderRadius: "50px",
+          marginLeft: "0.35rem !important",
+          borderColor: "#FF3B30",
+          color: "#FF3B30 !important", 
+          background: "transparent",
+          fontWeight: "normal",
+          fontSize: "0.9rem",
+          padding: "0.5em 0.8em",
+          boxShadow: "none"
+        }} 
+        pointing="left"
+      >
         {likeCount}
       </Label>
     </Button>
