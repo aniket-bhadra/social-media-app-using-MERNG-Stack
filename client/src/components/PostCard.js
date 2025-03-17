@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Icon, Label, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import moment from "moment";
@@ -7,21 +7,27 @@ import { AuthContext } from "../context/auth";
 import LikeButton from "./LikeButton";
 import DeleteButton from "./DeleteButton";
 import MyPopup from "../util/MyPopup";
+import getAnonymousUsername from "../config/anonymity";
 
 const PostCard = ({
   post: { body, createdAt, id, username, likeCount, commentCount, likes },
 }) => {
   const { user } = useContext(AuthContext);
+  const [DisplayedUsername, setDisplayedUsername] = useState(null);
+  const [avatar, setAvatar] = useState(null);
 
+  useEffect(() => {
+    const { anonymousUsername, avatar } = getAnonymousUsername(username);
+    setDisplayedUsername(anonymousUsername);
+    setAvatar(avatar);
+  }, [username]);
   return (
     <Card fluid>
       <Card.Content>
-        <Image
-          floated="right"
-          size="mini"
-          src="https://react.semantic-ui.com/images/avatar/large/jenny.jpg"
-        />
-        <Card.Header>{username}</Card.Header>
+        <Image floated="right" size="mini" src={avatar ? avatar : ""} />
+        <Card.Header>
+          {DisplayedUsername ? DisplayedUsername : "Anonymous"}
+        </Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow(true)}
         </Card.Meta>

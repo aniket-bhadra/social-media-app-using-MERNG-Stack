@@ -18,6 +18,7 @@ import { AuthContext } from "../context/auth";
 import LikeButton from "../components/LikeButton";
 import DeleteButton from "../components/DeleteButton";
 import MyPopup from "../util/MyPopup";
+import getAnonymousUsername from "../config/anonymity";
 
 const SinglePost = () => {
   const { postId } = useParams();
@@ -64,22 +65,19 @@ const SinglePost = () => {
       likeCount,
       commentCount,
     } = data.getPost;
+    const { anonymousUsername, avatar } = getAnonymousUsername(username);
 
     postMarkup = (
       <Grid>
         <Grid.Row>
           <Grid.Column width={2}>
-            <Image
-              src="https://react.semantic-ui.com/images/avatar/large/jenny.jpg"
-              size="small"
-              float="right"
-            />
+            <Image src={avatar ? avatar : ""} size="small" float="right" />
           </Grid.Column>
 
           <Grid.Column width={10}>
             <Card fluid>
               <Card.Content>
-                <Card.Header>{username}</Card.Header>
+                <Card.Header>{anonymousUsername}</Card.Header>
                 <Card.Meta> {moment(createdAt).fromNow()} </Card.Meta>
                 <Card.Description> {body} </Card.Description>
               </Card.Content>
