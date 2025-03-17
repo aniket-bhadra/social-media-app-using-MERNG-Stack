@@ -16,10 +16,11 @@ function MenuBar() {
   // console.log("a");
   const handleItemClick = (e, { name }) => setActiveItem(name);
   useEffect(() => {
+    if (!user || !user.username) return; // Ensure user exists before accessing username
     const { anonymousUsername, avatar } = getAnonymousUsername(user.username);
     setDisplayedUsername(anonymousUsername);
     setAvatar(avatar);
-  }, [user.username]);
+  }, [user]); 
 
   const dynamicMenu = user ? (
     <Menu pointing secondary size="massive" color="blue">
