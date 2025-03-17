@@ -13,3 +13,9 @@
 .ui.blue.button:focus, .ui.blue.buttons .button:focus{
     background-color: #2185d0;
 }
+
+/* edit the styles */
+
+body{
+    background-color: #F5F8FC;
+}
