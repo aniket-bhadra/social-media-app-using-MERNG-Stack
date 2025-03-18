@@ -9,7 +9,7 @@ import {
   Header,
   Grid,
 } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { AuthContext } from "../context/auth";
 import getAnonymousUsername from "../config/anonymity";
@@ -26,7 +26,8 @@ const colors = {
 
 function MenuBar() {
   const { user, logout } = useContext(AuthContext);
-  const pathname = window.location.pathname;
+  const location = useLocation();
+  const pathname = location.pathname;
   const path = pathname === "/" ? "home" : pathname.slice(1);
   const [activeItem, setActiveItem] = useState(path);
   const [displayedUsername, setDisplayedUsername] = useState(null);
@@ -35,6 +36,12 @@ function MenuBar() {
   const [profileModalOpen, setProfileModalOpen] = useState(false);
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
+
+  // Update activeItem when pathname changes
+  useEffect(() => {
+    const currentPath = pathname === "/" ? "home" : pathname.slice(1);
+    setActiveItem(currentPath);
+  }, [pathname]);
 
   // Check for mobile view
   useEffect(() => {
