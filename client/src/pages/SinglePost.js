@@ -64,6 +64,13 @@ const SinglePost = () => {
     }
   }, [data]);
 
+  // Function to handle comment button click
+  const handleCommentClick = () => {
+    if (commentInputRef.current) {
+      commentInputRef.current.focus();
+    }
+  };
+
   let postMarkup;
   if (!data) {
     postMarkup = (
@@ -187,7 +194,7 @@ const SinglePost = () => {
                 <MyPopup content="Comment on post">
                   <div
                     labelPosition="right"
-                    onClick={() => commentInputRef.current.focus()}
+                    onClick={handleCommentClick}
                     style={{
                       background: "transparent",
                       margin: 0,
