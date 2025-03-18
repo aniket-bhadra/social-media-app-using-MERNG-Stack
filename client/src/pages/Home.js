@@ -115,6 +115,7 @@ const Home = () => {
                     style={{ marginRight: "0.5rem", color: "#0D2B4B" }}
                   />
                   <h3>Your Recent Favorite Posts</h3>
+                  <div className="likes-count-badge">{recentLike?.length}</div>
                 </div>
 
                 <div className="liked-posts-content">{renderLikedPosts()}</div>
@@ -201,6 +202,20 @@ const Home = () => {
           border: 1px solid #EDF2F7;
           overflow: hidden;
         }
+          .likes-count-badge {
+            background-color: #FF7A45;
+            color: white;
+            border-radius: 50%;
+            min-width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.75rem;
+            padding: 0 6px;
+          }
         
         .liked-posts-header {
           padding: 1rem 1.5rem;
