@@ -9,6 +9,17 @@ import DeleteButton from "./DeleteButton";
 import MyPopup from "../util/MyPopup";
 import getAnonymousUsername from "../config/anonymity";
 
+// Enhanced color theme
+const colors = {
+  background: "#F5F8FC",
+  primary: "#0D2B4B",
+  secondary: "#FF7A45",
+  border: "#EDF2F7",
+  cardBg: "#FFFFFF",
+  lightText: "#6E7F91",
+  darkText: "#2D3748",
+};
+
 const PostCard = ({
   post: { body, createdAt, id, username, likeCount, commentCount, likes },
 }) => {
@@ -28,20 +39,20 @@ const PostCard = ({
       style={{
         boxShadow: "0 2px 8px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.12)",
         transition: "all 0.25s ease",
-        borderRadius: "12px",
+        borderRadius: "16px",
         overflow: "hidden",
         border: "none",
-        maxWidth: "100%",
-        marginBottom: "1rem",
-        background: "#fff",
+        width: "100%", // Ensuring full width within its container
+        marginBottom: "1.5rem",
+        background: colors.cardBg,
         transform: "translateY(0)",
-        "&:hover": {
-          transform: "translateY(-3px)",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.06)",
-        },
+        height: "300px", // Setting a fixed height for the card
+        display: "flex",
+        flexDirection: "column",
       }}
+      className="post-card"
     >
-      <Card.Content style={{ padding: "1.25rem" }}>
+      <Card.Content style={{ padding: "1.5rem", flex: "0 0 auto" }}>
         <div
           style={{
             display: "flex",
@@ -53,18 +64,18 @@ const PostCard = ({
             circular
             src={avatar ? avatar : ""}
             style={{
-              width: "45px",
-              height: "45px",
+              width: "48px",
+              height: "48px",
               objectFit: "cover",
-              border: "2px solid #0D2B4B",
+              border: `2px solid ${colors.primary}`,
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
             }}
           />
           <div style={{ marginLeft: "12px", flexGrow: 1 }}>
             <Card.Header
               style={{
-                color: "#0D2B4B",
-                fontSize: "1.1rem",
+                color: colors.primary,
+                fontSize: "1.2rem",
                 fontWeight: "600",
                 margin: "0",
               }}
@@ -74,48 +85,78 @@ const PostCard = ({
             <Card.Meta
               as={Link}
               to={`/posts/${id}`}
-              style={{ color: "#6E7F91", fontSize: "0.8rem", margin: "0" }}
+              style={{
+                color: colors.lightText,
+                fontSize: "0.85rem",
+                margin: "0",
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+              }}
             >
+              <Icon name="clock outline" size="small" />
               {moment(createdAt).fromNow()}
             </Card.Meta>
           </div>
         </div>
+      </Card.Content>
+
+      <Card.Content
+        style={{
+          padding: "0 1.5rem",
+          flex: "1 1 auto",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <Card.Description
           style={{
-            color: "#2D3748",
+            color: colors.darkText,
             fontSize: "1rem",
-            lineHeight: "1.5",
-            marginBottom: "1rem",
+            lineHeight: "1.6",
             wordWrap: "break-word",
-            padding: "0.5rem 0",
+            overflow: "auto", // Add scrollbar if content is too long
+            height: "100%", // Take available space
+            padding: "0.25rem 0.25rem 0.5rem 0",
+            marginBottom: "0.5rem",
+            // Custom scrollbar styling
+            scrollbarWidth: "thin",
+            scrollbarColor: `${colors.lightText} transparent`,
           }}
+          className="post-content"
         >
           {body}
         </Card.Description>
       </Card.Content>
+
       <Card.Content
         extra
         style={{
-          background: "#F8FAFC",
-          padding: "0.75rem 1.25rem",
-          borderTop: "1px solid #EDF2F7",
+          background: colors.background,
+          padding: "1rem 1.5rem",
+          borderTop: `1px solid ${colors.border}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           flexWrap: "wrap",
           gap: "0.5rem",
+          flex: "0 0 auto",
         }}
       >
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem",
+            gap: "0.75rem",
             flex: "1 1 auto",
           }}
         >
           <div className="social-button" style={{ position: "relative" }}>
-            <LikeButton user={user} post={{ id, likes, likeCount }} />
+            <LikeButton
+              user={user}
+              post={{ id, likes, likeCount, body, username, createdAt }}
+            />
           </div>
 
           <div className="social-button">
@@ -179,7 +220,7 @@ const PostCard = ({
           </div>
         )}
       </Card.Content>
-      <style jsx global>{`
+      <style>{`
         @media (max-width: 768px) {
           .social-button {
             flex: 1 1 auto;
@@ -194,6 +235,26 @@ const PostCard = ({
         .comment-button:hover {
           transform: translateY(-2px);
           filter: brightness(1.05);
+        }
+        
+        /* Custom scrollbar for webkit browsers */
+        .post-content::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        .post-content::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        
+        .post-content::-webkit-scrollbar-thumb {
+          background-color: ${colors.lightText};
+          border-radius: 20px;
+        }
+        
+        /* Hover effect for the card */
+        .post-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.06);
         }
       `}</style>
     </Card>

@@ -108,7 +108,7 @@ const PostForm = () => {
         </div>
       )}
 
-      <style jsx>{`
+      <style >{`
         .post-button:hover {
           background-color: #e56935 !important;
         }
