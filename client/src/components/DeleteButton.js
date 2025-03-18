@@ -121,7 +121,7 @@ const DeleteButton = ({ postId, commentId, callback }) => {
         }
         style={confirmStyle}
       />
-      <style jsx global>{`
+      <style >{`
         .delete-button:focus {
           outline: none;
           box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
