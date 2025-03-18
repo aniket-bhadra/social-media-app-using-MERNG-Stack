@@ -17,7 +17,7 @@ function generateToken(user) {
       username: user.username,
     },
     SECRET_KEY,
-    { expiresIn: "1h" }
+    { expiresIn: "3d" }
   );
 }
 
@@ -26,7 +26,7 @@ module.exports = {
     async login(_, { username, password }) {
       //cheking for empty values
       const { errors, valid } = validateLoginInput(username, password);
-      if(!valid){
+      if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
 
