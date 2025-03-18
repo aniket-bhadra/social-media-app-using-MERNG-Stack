@@ -1,21 +1,25 @@
-.page-title{
-    display: block !important;
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 10px;
+.page-title {
+  display: block !important;
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 10px;
 }
 
-.form-container{
-    width: 400px;
-    margin: auto;
+.form-container {
+  width: 400px;
+  margin: auto;
 }
 
-.ui.blue.button:focus, .ui.blue.buttons .button:focus{
-    background-color: #2185d0;
+.ui.blue.button:focus,
+.ui.blue.buttons .button:focus {
+  background-color: #2185d0;
 }
 
 /* edit the styles */
 
-body{
-    background-color: #F5F8FC;
+body {
+  background-color: #f5f8fc;
+}
+.customIcon {
+  color: darkblue !important;
 }
