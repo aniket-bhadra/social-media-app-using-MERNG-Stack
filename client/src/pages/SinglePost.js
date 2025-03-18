@@ -72,7 +72,12 @@ const SinglePost = () => {
           className="loading-container"
           style={{ textAlign: "center", padding: "3rem 0" }}
         >
-          <Icon loading name="spinner" size="big" color="#0D2B4B" />
+          <Icon
+            loading
+            name="spinner"
+            size="big"
+            style={{ color: "#0D2B4B" }}
+          />
           <p style={{ marginTop: "1rem", color: "#0D2B4B" }}>Loading post...</p>
         </div>
       </Container>
@@ -180,7 +185,7 @@ const SinglePost = () => {
 
               <div className="social-button">
                 <MyPopup content="Comment on post">
-                  <Button
+                  <div
                     labelPosition="right"
                     onClick={() => commentInputRef.current.focus()}
                     style={{
@@ -227,7 +232,7 @@ const SinglePost = () => {
                     >
                       {commentCount}
                     </Label>
-                  </Button>
+                  </div>
                 </MyPopup>
               </div>
             </div>
@@ -410,7 +415,7 @@ const SinglePost = () => {
   return (
     <>
       {postMarkup}
-      <style jsx global>{`
+      <style jsx="true" global="true">{`
         @media (max-width: 768px) {
           .social-button {
             flex: 1 1 auto;
