@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { Button, Confirm, Icon } from "semantic-ui-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 import MyPopup from "../util/MyPopup";
@@ -11,6 +13,15 @@ const DeleteButton = ({ postId, commentId, callback }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;
+
+  const colors = {
+    background: "#F5F8FC",
+    primary: "#0D2B4B",
+    secondary: "#FF7A45",
+    menuBackground: "#FFFFFF",
+    accent: "#6366F1",
+    border: "#E2E8F0",
+  };
 
   const [deletePostOrMutation] = useMutation(mutation, {
     update(proxy) {
@@ -25,6 +36,26 @@ const DeleteButton = ({ postId, commentId, callback }) => {
           query: FETCH_POSTS_QUERY,
           data: {
             getPosts: data.getPosts.filter((post) => post.id !== postId),
+          },
+        });
+
+        // Simple toast notification for post
+        toast("Post deleted successfully", {
+          style: {
+            background: colors.menuBackground,
+            color: colors.primary,
+            borderLeft: `4px solid ${colors.secondary}`,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+          },
+        });
+      } else {
+        // Simple toast notification for comment
+        toast("Comment deleted successfully", {
+          style: {
+            background: colors.menuBackground,
+            color: colors.primary,
+            borderLeft: `4px solid ${colors.secondary}`,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
           },
         });
       }
@@ -121,7 +152,7 @@ const DeleteButton = ({ postId, commentId, callback }) => {
         }
         style={confirmStyle}
       />
-      <style >{`
+      <style>{`
         .delete-button:focus {
           outline: none;
           box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
