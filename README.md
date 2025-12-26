@@ -14,8 +14,7 @@ _**PostWind** – An anonymous social platform where users can freely express th
 
 Experience the project in action:
 
-- 🌐 [Live Demo Link](https://your-demo-link.com)
-- 🎥 [Video Demo](https://your-video-demo-link.com)
+- 🌐 [Live Demo Link](https://aniket-bhadra.github.io/)
 
 ## 📸 Preview
 
@@ -45,69 +44,53 @@ _Watch how users engage with posts through likes and comments while maintaining 
 
 ### Login Page
 
-<details>
-<summary>View Screenshot</summary>
-
 <img src="READMEASSETS/sigup.png" alt="Login Page" width="800"/>
 
 _Secure authentication while maintaining user privacy with our anonymous system._
 
-</details>
 
 ### Post Creation
 
-<details>
-<summary>View Screenshot</summary>
+
 
 <img src="READMEASSETS/home1.png" alt="Post Creation" width="800"/>
 
 _Express your thoughts freely with our intuitive post creation interface._
 
-</details>
+
 
 ### Anonymous Profile
 
-<details>
-<summary>View Screenshot</summary>
 
 <img src="READMEASSETS/profile-page.png" alt="Anonymous Profile" width="800"/>
 
 _View your unique anonymous identity alongside your saved posts and account information._
 
-</details>
 
 ### Comments Section
 
-<details>
-<summary>View Screenshot</summary>
 
 <img src="READMEASSETS/comment-section.png" alt="Comments Section" width="800"/>
 
 _Engage in meaningful discussions while maintaining complete anonymity._
 
-</details>
+
 
 ### Saved Favorites
 
-<details>
-<summary>View Screenshot</summary>
 
 <img src="READMEASSETS/save-section.png" alt="Saved Favorites" width="800"/>
 
 _Quick access to all your favorite posts for future reference._
 
-</details>
 
 ### Mobile Responsive Design
 
-<details>
-<summary>View Screenshot</summary>
 
 <img src="READMEASSETS/mobile-view.png" alt="Mobile View" width="200"/>
 
 _Access all features seamlessly on any device with our fully responsive design._
 
-</details>
 
 ## ✨ Features
 
@@ -221,11 +204,11 @@ We welcome contributions! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+
 ## 📬 Contact
 
-- Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
-- Email - your.email@example.com
-- Project Link: [https://github.com/yourusername/postWind](https://github.com/yourusername/postWind)
+- linkedin - [https://www.linkedin.com/in/aniket-bhadra/](https://www.linkedin.com/in/aniket-bhadra/)
+- Email - aniketbhadra2@gmail.com
 
 ## 📊 Project Metrics
 
@@ -265,4 +248,4 @@ We welcome contributions! Please follow these steps:
 
 - 🏷️ **Tagging System**: Organize and discover content by tags ░░░░░░░░░░░░░░░░░░░░ 0%
 
-Made with ❤️ by [Your Name](https://github.com/yourusername)
+Made with ❤️ by [Aniket Bhadra](https://github.com/aniket-bhadra/)
